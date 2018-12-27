@@ -2762,10 +2762,19 @@ bool crocksdb_load_latest_options(const char* dbpath, crocksdb_env_t* env,
 crocksdb_ratelimiter_t* crocksdb_ratelimiter_create(
     int64_t rate_bytes_per_sec,
     int64_t refill_period_us,
-    int32_t fairness) {
+    int32_t fairness,
+    int32_t mode,
+    bool auto_tuned
+    ) {
+  RateLimiter::Mode mode_t = RateLimiter::Mode::kAllIo;
+  if (mode == 1) {
+     mode_t = RateLimiter::Mode::kReadsOnly;
+  } else if (mode == 2) {
+     mode_t = RateLimiter::Mode::kWritesOnly;
+  }
   crocksdb_ratelimiter_t* rate_limiter = new crocksdb_ratelimiter_t;
   rate_limiter->rep = NewGenericRateLimiter(rate_bytes_per_sec,
-                                            refill_period_us, fairness);
+                                            refill_period_us, fairness, mode_t, auto_tuned);
   return rate_limiter;
 }
 

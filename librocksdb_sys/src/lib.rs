@@ -535,6 +535,8 @@ extern "C" {
         rate_bytes_per_sec: i64,
         refill_period_us: i64,
         fairness: i32,
+        mode: i32,
+        auto_tuned: bool,
     ) -> *mut DBRateLimiter;
     pub fn crocksdb_ratelimiter_destroy(limiter: *mut DBRateLimiter);
     pub fn crocksdb_ratelimiter_set_bytes_per_second(

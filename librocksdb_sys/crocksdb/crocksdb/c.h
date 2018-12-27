@@ -1098,7 +1098,7 @@ extern C_ROCKSDB_LIBRARY_API void crocksdb_options_set_delayed_write_rate(
 
 /* RateLimiter */
 extern C_ROCKSDB_LIBRARY_API crocksdb_ratelimiter_t* crocksdb_ratelimiter_create(
-    int64_t rate_bytes_per_sec, int64_t refill_period_us, int32_t fairness);
+    int64_t rate_bytes_per_sec, int64_t refill_period_us, int32_t fairness, int32_t mode, bool auto_tuned);
 extern C_ROCKSDB_LIBRARY_API void crocksdb_ratelimiter_destroy(crocksdb_ratelimiter_t*);
 extern C_ROCKSDB_LIBRARY_API void crocksdb_ratelimiter_set_bytes_per_second(
     crocksdb_ratelimiter_t *limiter, int64_t rate_bytes_per_sec);
